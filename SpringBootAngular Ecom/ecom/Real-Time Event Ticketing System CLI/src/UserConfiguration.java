@@ -3,14 +3,41 @@ import java.util.Scanner;
 
 public class UserConfiguration {
 
-    private static int totalTickets;
-    private static int ticketReleaseRate;
-    private static int customerRetrievalRate;
-    private static int maxTicketCapacity;
+    private int totalTickets;
+    private int ticketReleaseRate;
+    private int customerRetrievalRate;
+    private int maxTicketCapacity;
     private static boolean validInput;
 
+    public static int userTotalTickets;
+    public static int userTicketReleaseRate;
+    public static int userCustomerRetrievalRate;
+    public static int userMaxTicketCapacity;
 
-    public static int UserConfigurationMenu(){
+
+    UserConfiguration(int totalTickets, int ticketReleaseRate, int customerRetrievalRate, int maxTicketCapacity) {
+        this.totalTickets = totalTickets;
+        this.ticketReleaseRate = ticketReleaseRate;
+        this.customerRetrievalRate = customerRetrievalRate;
+        this.maxTicketCapacity = maxTicketCapacity;
+        validInput = true;
+    }
+    public int getTotalTickets() {
+        return totalTickets;
+    }
+    public int getTicketReleaseRate() {
+        return ticketReleaseRate;
+    }
+    public int getCustomerRetrievalRate() {
+        return customerRetrievalRate;
+    }
+    public int getMaxTicketCapacity() {
+        return maxTicketCapacity;
+    }
+
+
+
+    public static void UserConfigurationMenu(){
         Scanner input = new Scanner(System.in);
         validInput=false;
         while (!validInput){
@@ -18,7 +45,7 @@ public class UserConfiguration {
                 System.out.println("////////////////======================/////////////////");
                 System.out.println("=============== Configuration Menu ====================");
                 System.out.print("Enter Total Tickets: ");
-                totalTickets=input.nextInt();
+                userTotalTickets=input.nextInt();
                 validInput=true;
             }catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number for Total Tickets: .");
@@ -30,7 +57,7 @@ public class UserConfiguration {
         while(!validInput) {
             try {
                 System.out.print("Enter Ticket Release Rate: ");
-                ticketReleaseRate = input.nextInt();
+                userTicketReleaseRate = input.nextInt();
                 validInput=true;
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number for Ticket Release Rate: .");
@@ -42,7 +69,7 @@ public class UserConfiguration {
         while (!validInput) {
             try {
                 System.out.print("Enter Customer Retrieval Rate: ");
-                customerRetrievalRate = input.nextInt();
+                userCustomerRetrievalRate = input.nextInt();
                 validInput=true;
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number for Customer Retrieval Rate: .");
@@ -54,8 +81,8 @@ public class UserConfiguration {
         while (!validInput) {
             try {
                 System.out.print("Enter Max Ticket Capacity: ");
-                maxTicketCapacity = input.nextInt();
-                if(maxTicketCapacity<totalTickets) {
+                int maxTicketCapacity = input.nextInt();
+                if(userMaxTicketCapacity< userTotalTickets) {
                     System.out.println("Wrong value for Max Ticket Capacity.Total Tickets Value is more than Max Ticket Capacity Value.");
                     validInput = false;
                 }else
@@ -66,12 +93,12 @@ public class UserConfiguration {
                     validInput = false;
             }
         }
+        UserConfiguration user = new UserConfiguration(userTotalTickets,userTicketReleaseRate,userCustomerRetrievalRate,userMaxTicketCapacity);
         System.out.println("////////////////======================/////////////////");
         System.out.println("=============== Configuration Details =================");
-        System.out.println("Total Tickets: "+totalTickets);
-        System.out.println("Ticket Release Rate: "+ticketReleaseRate);
-        System.out.println("Customer Retrieval Rate: "+customerRetrievalRate);
-        System.out.println("Max Ticket Capacity: "+maxTicketCapacity);
-        return maxTicketCapacity;
+        System.out.println("Total Tickets: "+user.getTotalTickets());
+        System.out.println("Ticket Release Rate: "+user.getTicketReleaseRate());
+        System.out.println("Customer Retrieval Rate: "+user.getCustomerRetrievalRate());
+        System.out.println("Max Ticket Capacity: "+user.getMaxTicketCapacity());
     }
 }

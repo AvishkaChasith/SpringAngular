@@ -1,17 +1,25 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Main extends UserConfiguration{
+public class Main{
     public static int userOption;
     public static boolean userOptionValidity;
 
     public static void main(String[] args){
         //UserConfiguration.UserConfigurationMenu();
-        applicationMenu();
-        switch(userOption){
-            case 1:
-                Vendor.venderRegister();
+
+        while(true){
+            applicationMenu();
+            switch(userOption){
+                case 1:
+                    Vendor.venderRegister();
+                    break;
+                case 3:
+                    Vendor.venderLogin();
+                    break;
+            }
         }
+
     }
     public static void applicationMenu(){
         userOptionValidity = false;
